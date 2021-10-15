@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody _rb;
+    private bool _grounded;
+    [SerializeField] private float jumpForce;
+
+    private void Start()
     {
-        
+        _rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Jump();
+    }
+
+    private void Jump()
+    {
+        if (!Input.GetKeyDown(KeyCode.Space) || !_grounded) return;
+        _grounded = false;
+        _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        _grounded = true;
     }
 }
