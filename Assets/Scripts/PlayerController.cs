@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private bool _grounded;
     [SerializeField] private float jumpForce;
+    public bool gameOver;
+
 
     private void Start()
     {
@@ -25,6 +27,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        _grounded = true;
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            _grounded = true;
+        }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            gameOver = true;
+            Debug.Log("Game Over!");
+        }
     }
 }
