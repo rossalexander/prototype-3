@@ -34,12 +34,14 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             _grounded = true;
-            
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
             gameOver = true;
             Debug.Log("Game Over!");
+
+            _playerAnimator.SetBool("Death_b", true);
+            _playerAnimator.SetInteger("DeathType_int", 1);
         }
     }
 }
