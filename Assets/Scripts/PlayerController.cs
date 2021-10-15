@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        if (gameOver) return;
         if (!Input.GetKeyDown(KeyCode.Space) || !_grounded) return;
         _playerAnimator.SetTrigger("Jump_trig");
         _grounded = false;
